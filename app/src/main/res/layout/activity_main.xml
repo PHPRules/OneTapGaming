@@ -1,0 +1,92 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffececec"
+    tools:context="com.onetapgaming.onetapwinning.MainActivity"
+    android:id="@+id/fullscreen_content">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <!--<ImageView android:id="@+id/fullscreen_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:keepScreenOn="true"
+        android:textColor="#33b5e5"
+        android:textStyle="bold"
+        android:textSize="50sp"
+        android:gravity="center"
+        android:text="@string/dummy_content"
+        android:visibility="invisible" />-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Username"
+        android:id="@+id/tvUsername"
+        android:layout_gravity="left|top"
+        android:textColor="#ff087db3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Ranking"
+        android:id="@+id/tvRanking"
+        android:layout_gravity="right|top"
+        android:textColor="#ff087db3" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="1000"
+            android:id="@+id/tvScore"
+            android:layout_gravity="center_horizontal"
+            android:textSize="100dp"
+            android:textColor="#ffdb7316" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="WINS"
+            android:id="@+id/tvWinsLabel"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#ffdb7316"
+            android:textSize="65dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:layout_gravity="center_horizontal">
+
+            <ImageButton
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:id="@+id/btnWin"
+                android:src="@drawable/button_win"
+                android:layout_marginLeft="10dp"/>
+            <ImageButton
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:id="@+id/btnTry"
+                android:src="@drawable/button_try"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+
+</FrameLayout>

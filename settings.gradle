@@ -1,0 +1,3 @@
+include ':app', ':OTWEndpoints'
+include ':BaseGameUtils'
+project(':BaseGameUtils').projectDir = new File(settingsDir, '../BaseGameUtils')

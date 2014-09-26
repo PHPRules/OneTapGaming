@@ -1,0 +1,76 @@
+// Currently, the appengine gradle plugin's appengine devappserver launch doesn't interact well with Intellij/AndroidStudio's
+// Gradle integration.  As a temporary solution, please launch from the command line.
+// ./gradlew modulename:appengineRun
+// If you would like more information on the gradle-appengine-plugin please refer to the github page
+// https://github.com/GoogleCloudPlatform/gradle-appengine-plugin
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.6'
+    }
+
+}
+
+repositories {
+    mavenCentral();
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'appengine'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+dependencies {
+  appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.6'
+  compile 'com.google.appengine:appengine-endpoints:1.9.6'
+  compile 'com.google.appengine:appengine-endpoints-deps:1.9.6'
+  compile 'javax.servlet:servlet-api:2.5'
+  compile 'javax.jdo:jdo-api:3.0'
+  compile 'javax.persistence:persistence-api:1.0.2'
+  compile 'org.datanucleus:datanucleus-api-jdo:3.1.3'
+  compile 'org.datanucleus:datanucleus-core:3.1.3'
+  compile 'com.google.appengine.orm:datanucleus-appengine:2.1.2'
+}
+
+appengine {
+  downloadSdk = true
+  appcfg {
+      email="jchodyniecki@gmail.com"
+      noCookies = true
+      oauth2 = true
+  }
+  endpoints {
+    getClientLibsOnBuild = true
+    getDiscoveryDocsOnBuild = true
+  }
+    enhancer {
+        version = "v2"
+        enhanceOnBuild = true
+    }
+}
+
+/*task jdoEnhance {
+    try {
+        logger.lifecycle 'Enhancing DataNucleus classes...'
+
+        ant.taskdef(name: 'enhance', classpath: project.runtimeClasspath.asPath, classname: 'org.datanucleus.enhancer.tools.EnhancerTask')
+        ant.enhance(failonerror: true, verbose: true ) {
+            classpath {
+                pathelement(path: project.configurations.compile.asPath)
+                //pathelement(path: project.configurations.datanucleus.asPath)
+            }
+            fileset(dir: sourceSets.main.output.classesDir, includes: '/*.class')
+        }
+    }
+    catch(Exception e) {
+        throw new GradleException('An error occurred enhancing DataNucleus classes.', e)
+    }
+    finally {
+        logger.lifecycle 'Finished enhancing DataNucleus classes.'
+    }
+}*/

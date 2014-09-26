@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    android:id="@+id/winFullScreenContent"
+    tools:context="com.onetapgaming.onetapwinning.WinActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+   <!-- <ImageView android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:keepScreenOn="true"
+        android:textColor="#33b5e5"
+        android:textStyle="bold"
+        android:textSize="50sp"
+        android:gravity="center"
+        android:text="@string/dummy_content"
+        android:visibility="invisible" />-->
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/activityWinHeader"
+        android:src="@drawable/header_winning"
+        android:scaleType="fitCenter"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:id="@+id/imageButton"
+        android:src="@drawable/bronze"
+        android:scaleType="fitCenter"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:id="@+id/imageButton2"
+        android:src="@drawable/silver"
+        android:scaleType="fitCenter" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:id="@+id/imageButton3"
+        android:src="@drawable/gold"
+        android:scaleType="fitCenter"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:id="@+id/imageButton4"
+        android:src="@drawable/platinum"
+        android:scaleType="fitCenter"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:id="@+id/imageButton5"
+        android:src="@drawable/diamond"
+        android:scaleType="fitCenter"
+        />
+
+</LinearLayout>

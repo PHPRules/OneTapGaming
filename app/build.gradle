@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        applicationId "com.onetapgaming.onetapwinning"
+        minSdkVersion 16
+        targetSdkVersion 20
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            runProguard false
+        }
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file("../../OneTapGamingKS.jks")
+            storePassword "29fea8be3e69fba439498812d0a8acff75085e00f213e98f012a7a55ef8e857f"
+            keyAlias "onetapwinning"
+            keyPassword "03ab1aff0e4375d3bbbf76c644595c7cb193bcff628c7e0f47c473240654413e"
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.google.http-client:google-http-client-gson:1.17.0-rc'
+    // You must install or update the Google Repository through the SDK manager to use this dependency.
+    // You must install or update the Support Repository through the SDK manager to use this dependency.
+    // You must install or update the Support Repository through the SDK manager to use this dependency.
+    // You must install or update the Support Repository through the SDK manager to use this dependency.
+    compile project(':BaseGameUtils')
+
+    compile 'com.google.android.gms:play-services:4.2.42'
+    // You must install or update the Support Repository through the SDK manager to use this dependency.
+    compile 'com.android.support:support-v4:20.+'
+    compile project(path: ':OTWEndpoints', configuration: 'android-endpoints')
+}
