@@ -1,6 +1,7 @@
 package com.onetapgaming.onetapwinning;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.View;
@@ -14,7 +15,7 @@ import java.util.Random;
  */
 public class DrawShapes implements Runnable {
 
-    Random randX, randY;
+    Random randX, randY, rS;
     View destination;
 
     double theta;
@@ -22,6 +23,7 @@ public class DrawShapes implements Runnable {
     public DrawShapes(View view) {
         randX = new Random();
         randY = new Random();
+        rS = new Random();
         destination = view;
     }
 
@@ -31,9 +33,10 @@ public class DrawShapes implements Runnable {
         Point p = new Point();
         display.getSize(p);
         CustomDrawableView customDrawableView;
-        int xPos = randX.nextInt(p.x-100);
-        int yPos = randY.nextInt(p.y-100);
-        customDrawableView = new CustomDrawableView(destination.findViewById(R.id.tryFullScreenContent).getContext(), xPos,yPos > 80? yPos : yPos+100 );
+        int size = rS.nextInt(250 - 125) + 125;
+        int xPos = randX.nextInt(p.x-size);
+        int yPos = randY.nextInt(p.y-size);
+        customDrawableView = new CustomDrawableView(destination.findViewById(R.id.tryFullScreenContent).getContext(), xPos, (yPos > 80? yPos : (yPos + 100)), size);
         ((FrameLayout)destination.findViewById(R.id.tryFullScreenContent)).addView(customDrawableView);
     }
 }
