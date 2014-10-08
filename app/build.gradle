@@ -28,6 +28,12 @@ android {
             keyAlias "onetapwinning"
             keyPassword "03ab1aff0e4375d3bbbf76c644595c7cb193bcff628c7e0f47c473240654413e"
         }
+        release {
+            storeFile file("../../OneTapGamingProductionKS.jks")
+            storePassword "FCC1706E332139A061698F3015C425146C333BD3840DA13DF7985738476670C41713E9FDEB9BF6E070596EA55400CAAE65BEEA0E53284B509200827EBEF6C50E"
+            keyAlias "onetapwinning"
+            keyPassword "41F302D884F9E11E4DBF6B84EB6FD63A19C4BAC25E820A2C654C11E3DFA354CB9105B573C7CBA0604A4B0E4C09C1F23BAD3DED6F7C9CC62F6A144CCA330ED063"
+        }
     }
 }
 

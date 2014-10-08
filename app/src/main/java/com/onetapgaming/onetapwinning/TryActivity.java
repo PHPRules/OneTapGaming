@@ -175,10 +175,10 @@ public class TryActivity extends BaseGameActivity implements View.OnClickListene
 
             public void onTick(long millisUntilFinished) {
                 double test = random.nextDouble();
-                if(test > .85) {
+                /*if(test > .85) {
                     int delay = random.nextInt(1500);
                     handler.postDelayed(new DrawShapes(findViewById(R.id.tryFullScreenContent)), Long.valueOf(delay));
-                }
+                }*/
             }
 
             public void onFinish() {
