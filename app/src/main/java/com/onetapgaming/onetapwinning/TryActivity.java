@@ -112,7 +112,7 @@ public class TryActivity extends BaseGameActivity implements View.OnClickListene
                             //controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
                         }
 
-                        if (visible && AUTO_HIDE) {
+                        if (visible) {
                             // Schedule a hide().
                             delayedHide(AUTO_HIDE_DELAY_MILLIS);
                         }
@@ -147,10 +147,11 @@ public class TryActivity extends BaseGameActivity implements View.OnClickListene
 
             public void onFinish() {
                 if(((FrameLayout)findViewById(R.id.tryFullScreenContent)).getChildCount() > 1) {
-                    ((TextView) findViewById(R.id.tvTimer)).setText("YOU LOSE.");
-                }
-                else {
-                    ((TextView) findViewById(R.id.tvTimer)).setText("WINNING!");
+                    ((TextView) findViewById(R.id.tvTimer)).setText("YOU LOSE");
+                    // Need to add a WIN button
+
+                } else {
+                    ((TextView) findViewById(R.id.tvTimer)).setText("YOU WIN");
                     Bundle extras = getIntent().getExtras();
                     long score = -1;
                     if (extras != null) {
@@ -161,6 +162,8 @@ public class TryActivity extends BaseGameActivity implements View.OnClickListene
                         Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 1);
                     }
                 }
+
+                // Should add a go back button
             }
         }.start();
         // 28000
@@ -169,7 +172,7 @@ public class TryActivity extends BaseGameActivity implements View.OnClickListene
             Handler handler = new Handler(){
                 public void handleMessage(android.os.Message msg) {
                     findViewById(R.id.tryFullScreenContent).invalidate();
-                };
+                }
             };
 
             Random random = new Random();

@@ -6,7 +6,9 @@
     android:background="#ffffff"
     android:id="@+id/winFullScreenContent"
     tools:context="com.onetapgaming.onetapwinning.WinActivity">
-
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
@@ -20,57 +22,60 @@
         android:gravity="center"
         android:text="@string/dummy_content"
         android:visibility="invisible" />-->
-
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="167dp"
+                android:id="@+id/activityWinHeader"
+                android:src="@drawable/header_winning"
+                android:scaleType="fitCenter"
+                />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="167dp"
-        android:id="@+id/activityWinHeader"
-        android:src="@drawable/header_winning"
-        android:scaleType="fitCenter"
-        />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:id="@+id/bronzeButton"
+                android:src="@drawable/bronze"
+                android:background="#ffffff"
+                android:scaleType="fitCenter"/>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:id="@+id/bronzeButton"
-        android:src="@drawable/bronze"
-        android:background="#ffffff"
-        android:scaleType="fitCenter"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:id="@+id/silverButton"
+                android:src="@drawable/silver"
+                android:background="#ffffff"
+                android:scaleType="fitCenter" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:id="@+id/silverButton"
-        android:src="@drawable/silver"
-        android:background="#ffffff"
-        android:scaleType="fitCenter" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:id="@+id/goldButton"
+                android:src="@drawable/gold"
+                android:background="#ffffff"
+                android:scaleType="fitCenter"/>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:id="@+id/goldButton"
-        android:src="@drawable/gold"
-        android:background="#ffffff"
-        android:scaleType="fitCenter"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:id="@+id/platinumButton"
+                android:src="@drawable/platinum"
+                android:background="#ffffff"
+                android:scaleType="fitCenter"/>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:id="@+id/platinumButton"
-        android:src="@drawable/platinum"
-        android:background="#ffffff"
-        android:scaleType="fitCenter"/>
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="92dp"
-        android:id="@+id/diamondButton"
-        android:src="@drawable/diamond"
-        android:background="#ffffff"
-        android:scaleType="fitCenter"
-        />
-
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="92dp"
+                android:id="@+id/diamondButton"
+                android:src="@drawable/diamond"
+                android:background="#ffffff"
+                android:scaleType="fitCenter"
+                />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
