@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Username"
+        android:text=""
         android:id="@+id/tvUsername"
         android:layout_gravity="left|top"
         android:textColor="#ff087db3" />
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Ranking"
+        android:text=""
         android:id="@+id/tvRanking"
         android:layout_gravity="right|top"
         android:textColor="#ff087db3" />
@@ -51,11 +51,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="1000"
             android:id="@+id/tvScore"
             android:layout_gravity="center_horizontal"
             android:textSize="100dp"
-            android:textColor="#ffdb7316" />
+            android:textColor="#ffdb7316"
+            android:text="" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -70,8 +70,8 @@
         <LinearLayout
             android:id="@+id/secondLinearLayout"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
             android:weightSum="1"
             android:layout_gravity="center_horizontal">
 
@@ -80,13 +80,13 @@
                 android:layout_height="match_parent"
                 android:id="@+id/btnWin"
                 android:src="@drawable/button_win"
-                android:layout_marginLeft="10dp"/>
+                android:layout_margin="3dp"/>
             <ImageButton
                 android:layout_width="175dp"
                 android:layout_height="match_parent"
                 android:id="@+id/btnTry"
                 android:src="@drawable/button_try"
-                android:layout_marginLeft="10dp"/>
+                android:layout_margin="3dp"/>
         </LinearLayout>
 
     </LinearLayout>

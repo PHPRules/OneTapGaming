@@ -30,19 +30,18 @@ public class CustomDrawableView extends ImageView implements View.OnClickListene
     Random rR;
     Random rG;
     Random rB;
+    int r, g, b;
     Random taps;
 
-    public CustomDrawableView(Context context, int x, int y) {
+    public CustomDrawableView(Context context, int x, int y, int size) {
         super(context);
-        int width = 100;
-        int height = 100;
         rR = new Random();
         rG = new Random();
         rB = new Random();
         taps = new Random();
-        int r = rR.nextInt(255);
-        int g = rG.nextInt(255);
-        int b = rB.nextInt(255);
+        this.r = rR.nextInt(255);
+        this.g = rG.nextInt(255);
+        this.b = rB.nextInt(255);
         numTapsLeft = taps.nextInt(5)+1;
 
         if(r > g && r > b)
@@ -60,9 +59,9 @@ public class CustomDrawableView extends ImageView implements View.OnClickListene
 
         mDrawable = new ShapeDrawable(new RectShape());
         mDrawable.getPaint().setARGB(255,r,g,b);
-        mDrawable.setBounds(x, y, x + width, y + height);
+        mDrawable.setBounds(x, y, x + size, y + size);
         setOnClickListener(this);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(size, size);
         params.topMargin = y;
         params.leftMargin = x;
         setLayoutParams(params);
@@ -94,8 +93,8 @@ public class CustomDrawableView extends ImageView implements View.OnClickListene
          }
         );*/
 
-        mDrawable.setIntrinsicWidth(width);
-        mDrawable.setIntrinsicHeight(height);
+        mDrawable.setIntrinsicWidth(size);
+        mDrawable.setIntrinsicHeight(size);
         //this.setBackgroundColor(Color.GREEN);
         //maybe?
         this.setHapticFeedbackEnabled(true);
@@ -106,12 +105,13 @@ public class CustomDrawableView extends ImageView implements View.OnClickListene
         //this.setMinimumWidth(100);
     }
 
+    // This is actually being called every millisecond
     protected void onDraw(Canvas canvas) {
         //this.draw(canvas);
         TextPaint paint = new TextPaint();
         //Paint paint = new Paint();
         paint.setStrokeWidth(1);
-        paint.setColor(Color.BLUE);
+        paint.setColor(Color.WHITE);
         paint.setTextSize(48);
         canvas.drawText(String.valueOf(numTapsLeft), mDrawable.getBounds().centerX(), mDrawable.getBounds().centerY(), paint);
         ////this.setTextSize(48);
@@ -124,6 +124,7 @@ public class CustomDrawableView extends ImageView implements View.OnClickListene
         if (numTapsLeft > 1) {
             numTapsLeft--;
             invalidate();
+            this.setBackgroundColor(Color.argb((105  + (numTapsLeft * 30)), r, g, b));
         } else {
             //this.setVisibility(View.INVISIBLE);
             ((FrameLayout)((Activity)this.context).findViewById(R.id.tryFullScreenContent)).removeView(v);

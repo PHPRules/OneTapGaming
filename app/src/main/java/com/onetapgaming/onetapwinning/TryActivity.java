@@ -138,6 +138,7 @@ public class TryActivity extends BaseGameActivity implements View.OnClickListene
         //setContentView(mCustomDrawableView);
 
         //MAKE THESE GLOBAL VARIABLES OR RESOURCES
+        // 30000
         new CountDownTimer(30000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -149,7 +150,7 @@ public class TryActivity extends BaseGameActivity implements View.OnClickListene
                     ((TextView) findViewById(R.id.tvTimer)).setText("YOU LOSE.");
                 }
                 else {
-                    ((TextView) findViewById(R.id.tvTimer)).setText("YOU WON?");
+                    ((TextView) findViewById(R.id.tvTimer)).setText("WINNING!");
                     Bundle extras = getIntent().getExtras();
                     long score = -1;
                     if (extras != null) {
@@ -158,11 +159,11 @@ public class TryActivity extends BaseGameActivity implements View.OnClickListene
                     if(score >= 0)
                     {
                         Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 1);
-
                     }
                 }
             }
         }.start();
+        // 28000
         new CountDownTimer(28000, 200) {
 
             Handler handler = new Handler(){
@@ -175,10 +176,10 @@ public class TryActivity extends BaseGameActivity implements View.OnClickListene
 
             public void onTick(long millisUntilFinished) {
                 double test = random.nextDouble();
-                /*if(test > .85) {
+                if(test > .84) {
                     int delay = random.nextInt(1500);
                     handler.postDelayed(new DrawShapes(findViewById(R.id.tryFullScreenContent)), Long.valueOf(delay));
-                }*/
+                }
             }
 
             public void onFinish() {
