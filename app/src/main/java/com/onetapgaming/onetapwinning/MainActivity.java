@@ -162,7 +162,7 @@ public class MainActivity extends BaseGameActivity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(arg0.getContext(), WinActivity.class);
                 intent.putExtra("currentScore", score);
-                startActivity(intent);
+                startActivityForResult(intent,2);
             }
         });
         findViewById(R.id.btnTry).setOnClickListener(new View.OnClickListener() {
@@ -253,6 +253,7 @@ public class MainActivity extends BaseGameActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     if(isSignedIn()) {
         refreshUserInfo();
     }
