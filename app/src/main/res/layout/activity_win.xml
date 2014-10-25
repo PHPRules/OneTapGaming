@@ -35,35 +35,35 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:id="@+id/imageButton"
+        android:id="@+id/bronzeButton"
         android:src="@drawable/bronze"
         android:scaleType="fitCenter"/>
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:id="@+id/imageButton2"
+        android:id="@+id/silverButton"
         android:src="@drawable/silver"
         android:scaleType="fitCenter" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:id="@+id/imageButton3"
+        android:id="@+id/goldButton"
         android:src="@drawable/gold"
         android:scaleType="fitCenter"/>
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:id="@+id/imageButton4"
+        android:id="@+id/platinumButton"
         android:src="@drawable/platinum"
         android:scaleType="fitCenter"/>
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:id="@+id/imageButton5"
+        android:id="@+id/diamondButton"
         android:src="@drawable/diamond"
         android:scaleType="fitCenter"
         />

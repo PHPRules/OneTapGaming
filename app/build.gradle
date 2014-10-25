@@ -46,7 +46,8 @@ dependencies {
     // You must install or update the Support Repository through the SDK manager to use this dependency.
     compile project(':BaseGameUtils')
 
-    compile 'com.google.android.gms:play-services:4.2.42'
+    //compile 'com.google.android.gms:play-services:4.2.42'
+    compile 'com.google.android.gms:play-services:5.+'
     // You must install or update the Support Repository through the SDK manager to use this dependency.
     compile 'com.android.support:support-v4:20.+'
     compile project(path: ':OTWEndpoints', configuration: 'android-endpoints')

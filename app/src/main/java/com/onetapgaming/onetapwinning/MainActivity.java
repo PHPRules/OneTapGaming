@@ -1,5 +1,6 @@
 package com.onetapgaming.onetapwinning;
 
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
@@ -31,13 +32,15 @@ import android.os.Handler;
 import android.provider.SyncStateContract;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.onetapgaming.onetapwinning.R;
-
-import org.w3c.dom.Text;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.io.IOException;
 
@@ -84,6 +87,7 @@ public class MainActivity extends BaseGameActivity {
     private PlayerEndpoint service;
     private ImageButton btnWin;
     private long score;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +161,7 @@ public class MainActivity extends BaseGameActivity {
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(arg0.getContext(), WinActivity.class);
+                intent.putExtra("currentScore", score);
                 startActivity(intent);
             }
         });
@@ -168,6 +173,7 @@ public class MainActivity extends BaseGameActivity {
                 startActivityForResult(intent, 1);
             }
         });
+        //TODO: MAKE THESE STRING RESOURCES
         credential = GoogleAccountCredential.usingAudience(this, "server:client_id:" + "117914753245-1h4gfgmu5lnr2b20bqb8l5l3urltvvkv.apps.googleusercontent.com");
         findViewById(R.id.tvRanking).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,6 +182,16 @@ public class MainActivity extends BaseGameActivity {
                         getString(R.string.leaderboard_MostWins)), 1337);
             }
         });
+
+        AdView mAdView = (AdView) findViewById(R.id.mainAdView);
+       /* mAdView = new AdView(this);
+        mAdView.setAdSize(AdSize.BANNER);
+        mAdView.setAdUnitId(getString(R.string.banner_ad_unit_id));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        mAdView.setLayoutParams(params); */
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("5E7608D8F2BE60A2B468DF518C5EA48A").build();
+        mAdView.loadAd(adRequest);
+        //((LinearLayout)findViewById(R.id.mainLinearLayout)).addView(mAdView);
 
     }
 

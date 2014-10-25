@@ -1,12 +1,17 @@
 package com.onetapgaming.onetapwinning;
 
+import com.google.android.gms.games.Games;
+import com.google.example.games.basegameutils.BaseGameActivity;
 import com.onetapgaming.onetapwinning.util.SystemUiHider;
+import com.onetapgaming.onetapwinning.util.*;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
@@ -21,7 +26,7 @@ import com.onetapgaming.onetapwinning.R;
  *
  * @see SystemUiHider
  */
-public class WinActivity extends Activity {
+public class WinActivity extends BaseGameActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -49,6 +54,8 @@ public class WinActivity extends Activity {
      * The instance of the {@link SystemUiHider} for this activity.
      */
     private SystemUiHider mSystemUiHider;
+
+    private IabHelper mHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +126,32 @@ public class WinActivity extends Activity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         //findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+
+        String base64EncodedPublicKey =
+                "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnvvdWGYzgwJrIvEJdNFJJusndPEomjRUbDJpOQaVlfqSriPhcADoyGOYzl1WDfxu4ktoK76hDnZX4DTjZ4WnRlbpJgD/IRV9n9llLgF0SJ83vhz+/hYnqpCCASaoZ23tRLosDjRjtVuIhENQ6JLutmSFHDuxFdb0qBvndl+T1oIRiYlnpToUAeiyxkjdox+V9hI9kFoY0WQNPPRLsKtpxHti+EXSkhkRYo3Yw4MqIX7NyLwkEg3s/dKFX/g4/g+mMHh2GqRgEgmr65v49li9uxruWaw8NkREZC7j1fW0bypD5tJcn5CYc10URiHMcNuQY9eLQAEYpGtJjFrqEk5LgQIDAQAB";
+
+        mHelper = new IabHelper(this, base64EncodedPublicKey);
+
+        mHelper.startSetup(new
+                                   IabHelper.OnIabSetupFinishedListener() {
+                                       public void onIabSetupFinished(IabResult result)
+                                       {
+                                           if (!result.isSuccess()) {
+                                               Log.d("WIN ACTIVITY", "In-app Billing setup failed: " +
+                                                       result);
+                                           } else {
+                                               Log.d("WIN ACTIVITY", "In-app Billing is set up OK");
+                                           }
+                                       }
+                                   });
+
+        findViewById(R.id.bronzeButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                mHelper.launchPurchaseFlow(WinActivity.this, "bronze_win_package", 10001,
+                        mPurchaseFinishedListener, "bronzeWinPackagePurchase");
+            }
+        });
     }
 
     @Override
@@ -191,5 +224,58 @@ public class WinActivity extends Activity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data)
+    {
+        if (!mHelper.handleActivityResult(requestCode,
+                resultCode, data)) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener
+            = new IabHelper.OnIabPurchaseFinishedListener() {
+        public void onIabPurchaseFinished(IabResult result,
+                                          Purchase purchase)
+        {
+            if (result.isFailure()) {
+                // Handle error
+                return;
+            }
+            else if (purchase.getSku().equals("bronze_win_package")) {
+                //consumeItem();
+                Bundle extras = getIntent().getExtras();
+                long score = -1;
+                if (extras != null) {
+                    score = extras.getLong("currentScore");
+                }
+                if(score >= 0)
+                {
+                    Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 50);
+
+                }
+            }
+
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mHelper != null) mHelper.dispose();
+        mHelper = null;
+    }
+
+    @Override
+    public void onSignInFailed() {
+        //nothing
+    }
+
+    @Override
+    public void onSignInSucceeded() {
+        //nothing
     }
 }
