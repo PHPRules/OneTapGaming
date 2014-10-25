@@ -44,8 +44,9 @@
         android:id="@+id/mainLinearLayout"
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="300dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginTop="-50px"
+        android:layout_height="260dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -53,7 +54,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/tvScore"
             android:layout_gravity="center_horizontal"
-            android:textSize="100dp"
+            android:textSize="80dp"
             android:textColor="#ffdb7316"
             android:text="" />
 
@@ -65,7 +66,7 @@
             android:id="@+id/tvWinsLabel"
             android:layout_gravity="center_horizontal"
             android:textColor="#ffdb7316"
-            android:textSize="65dp" />
+            android:textSize="50dp" />
 
         <LinearLayout
             android:id="@+id/secondLinearLayout"
@@ -97,9 +98,8 @@
     <com.google.android.gms.ads.AdView android:id="@+id/mainAdView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         ads:adUnitId="@string/banner_ad_unit_id"
         ads:adSize="BANNER"
-        android:layout_gravity="right|bottom" />
+        android:layout_gravity="end|bottom" />
 
 </FrameLayout>
