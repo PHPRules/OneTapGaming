@@ -39,22 +39,22 @@ public class CustomDrawableView extends ImageView implements View.OnClickListene
         rG = new Random();
         rB = new Random();
         taps = new Random();
-        this.r = rR.nextInt(255);
-        this.g = rG.nextInt(255);
-        this.b = rB.nextInt(255);
+        this.r = rR.nextInt(200);
+        this.g = rG.nextInt(200);
+        this.b = rB.nextInt(200);
         numTapsLeft = taps.nextInt(5)+1;
 
         if(r > g && r > b)
         {
-            r = 255;
+            r = 200;
         }
         else if(g > r && g > b)
         {
-            g = 255;
+            g = 200;
         }
         else
         {
-            b = 255;
+            b = 200;
         }
 
         mDrawable = new ShapeDrawable(new RectShape());
