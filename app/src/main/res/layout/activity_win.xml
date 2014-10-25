@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="#ffffff"
     android:id="@+id/winFullScreenContent"
     tools:context="com.onetapgaming.onetapwinning.WinActivity">
 
@@ -26,7 +26,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="167dp"
         android:id="@+id/activityWinHeader"
         android:src="@drawable/header_winning"
         android:scaleType="fitCenter"
@@ -34,37 +34,42 @@
 
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:id="@+id/bronzeButton"
         android:src="@drawable/bronze"
+        android:background="#ffffff"
         android:scaleType="fitCenter"/>
 
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:id="@+id/silverButton"
         android:src="@drawable/silver"
+        android:background="#ffffff"
         android:scaleType="fitCenter" />
 
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:id="@+id/goldButton"
         android:src="@drawable/gold"
+        android:background="#ffffff"
         android:scaleType="fitCenter"/>
 
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:id="@+id/platinumButton"
         android:src="@drawable/platinum"
+        android:background="#ffffff"
         android:scaleType="fitCenter"/>
 
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="92dp"
         android:id="@+id/diamondButton"
         android:src="@drawable/diamond"
+        android:background="#ffffff"
         android:scaleType="fitCenter"
         />
 
