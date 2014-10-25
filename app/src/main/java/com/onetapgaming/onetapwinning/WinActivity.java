@@ -152,6 +152,34 @@ public class WinActivity extends BaseGameActivity {
                         mPurchaseFinishedListener, "bronzeWinPackagePurchase");
             }
         });
+        findViewById(R.id.silverButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                mHelper.launchPurchaseFlow(WinActivity.this, "silver_win_package", 10002,
+                        mPurchaseFinishedListener, "silverWinPackagePurchase");
+            }
+        });
+        findViewById(R.id.goldButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                mHelper.launchPurchaseFlow(WinActivity.this, "gold_win_package", 10003,
+                        mPurchaseFinishedListener, "goldWinPackagePurchase");
+            }
+        });
+        findViewById(R.id.platinumButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                mHelper.launchPurchaseFlow(WinActivity.this, "platinum_win_package", 10004,
+                        mPurchaseFinishedListener, "platinumWinPackagePurchase");
+            }
+        });
+        findViewById(R.id.diamondButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                mHelper.launchPurchaseFlow(WinActivity.this, "diamond_win_package", 10005,
+                        mPurchaseFinishedListener, "diamondWinPackagePurchase");
+            }
+        });
     }
 
     @Override
@@ -245,16 +273,48 @@ public class WinActivity extends BaseGameActivity {
                 // Handle error
                 return;
             }
+            Bundle extras = getIntent().getExtras();
+            long score = -1;
+            if (extras != null) {
+                score = extras.getLong("currentScore");
+            }
             else if (purchase.getSku().equals("bronze_win_package")) {
                 //consumeItem();
-                Bundle extras = getIntent().getExtras();
-                long score = -1;
-                if (extras != null) {
-                    score = extras.getLong("currentScore");
-                }
                 if(score >= 0)
                 {
                     Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 50);
+
+                }
+            }
+            else if (purchase.getSku().equals("silver_win_package")) {
+                //consumeItem();
+                if(score >= 0)
+                {
+                    Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 200);
+
+                }
+            }
+            else if (purchase.getSku().equals("gold_win_package")) {
+                //consumeItem();
+                if(score >= 0)
+                {
+                    Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 700);
+
+                }
+            }
+            else if (purchase.getSku().equals("platinum_win_package")) {
+                //consumeItem();
+                if(score >= 0)
+                {
+                    Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 2500);
+
+                }
+            }
+            else if (purchase.getSku().equals("diamond_win_package")) {
+                //consumeItem();
+                if(score >= 0)
+                {
+                    Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 5000);
 
                 }
             }
