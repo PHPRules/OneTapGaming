@@ -2,11 +2,13 @@ package com.onetapgaming.onetapwinning;
 
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.BaseGameActivity;
+import com.onetapgaming.onetapwinning.util.AchievementUtil;
 import com.onetapgaming.onetapwinning.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Build;
 import android.os.Bundle;
@@ -64,10 +66,11 @@ public class TryActivity extends BaseGameActivity implements View.OnClickListene
      */
     private SystemUiHider mSystemUiHider;
 
-    private ArrayList<DrawShapes> shapesArrayList;
+    private Intent backIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        backIntent = new Intent(this.getApplicationContext(), MainActivity.class);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
 
@@ -148,6 +151,10 @@ public class TryActivity extends BaseGameActivity implements View.OnClickListene
             public void onFinish() {
                 if(((FrameLayout)findViewById(R.id.tryFullScreenContent)).getChildCount() > 1) {
                     ((TextView) findViewById(R.id.tvTimer)).setText("YOU LOSE");
+                    //Lose Achievement
+                    if(isSignedIn()) {
+                        Games.Achievements.unlock(getApiClient(), getString(R.string.loseAcheivement));
+                    }
                     // Need to add a WIN button
 
                 } else {
@@ -159,7 +166,11 @@ public class TryActivity extends BaseGameActivity implements View.OnClickListene
                     }
                     if(score >= 0)
                     {
-                        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 1);
+                        score++;
+                        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score);
+                        new AchievementUtil(getApiClient(), TryActivity.this).unlockAchievements(((int) score));
+                        backIntent.putExtra("newScore", score);
+
                     }
                 }
 
@@ -283,4 +294,13 @@ public class TryActivity extends BaseGameActivity implements View.OnClickListene
     public void onSignInSucceeded() {
 
     }
+
+   /* @Override
+    public void onBackPressed() {
+        startActivity(backIntent);
+        super.onBackPressed();
+        this.finish();
+    }*/
+    
+
 }

@@ -8,5 +8,11 @@
     <string name="title_activity_try">TryActivity</string>
     <string name="title_activity_win">WinActivity</string>
     <string name="banner_ad_unit_id">ca-app-pub-7272448357240924/6815369896</string>
-
+    <string name="oneWinAcheivement">CgkI3bGRorcDEAIQAg</string>
+    <string name="fiveWinAcheivement">CgkI3bGRorcDEAIQAw </string>
+    <string name="fiftyWinAcheivement">CgkI3bGRorcDEAIQBA</string>
+    <string name="hundredWinAcheivement">CgkI3bGRorcDEAIQBQ</string>
+    <string name="buyAcheivement">CgkI3bGRorcDEAIQBg</string>
+    <string name="topAcheivement">CgkI3bGRorcDEAIQBw</string>
+    <string name="loseAcheivement">CgkI3bGRorcDEAIQCA</string>
 </resources>

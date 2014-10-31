@@ -87,6 +87,7 @@ public class MainActivity extends BaseGameActivity {
     private PlayerEndpoint service;
     private ImageButton btnWin;
     private long score;
+    private long rank;
     private AdView mAdView;
 
     @Override
@@ -162,7 +163,7 @@ public class MainActivity extends BaseGameActivity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(arg0.getContext(), WinActivity.class);
                 intent.putExtra("currentScore", score);
-                startActivityForResult(intent,2);
+                startActivityForResult(intent, 2);
             }
         });
         findViewById(R.id.btnTry).setOnClickListener(new View.OnClickListener() {
@@ -170,6 +171,7 @@ public class MainActivity extends BaseGameActivity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(arg0.getContext(), TryActivity.class);
                 intent.putExtra("currentScore", score);
+                intent.putExtra("currentRank", rank);
                 startActivityForResult(intent, 1);
             }
         });
@@ -253,19 +255,21 @@ public class MainActivity extends BaseGameActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(isSignedIn()) {
+            refreshUserInfo();
+        }
+        //System.out.println("!!!!!!!!!!!!!!!!!!!!!1" + requestCode + " " + resultCode);
         super.onActivityResult(requestCode, resultCode, data);
-    if(isSignedIn()) {
-        refreshUserInfo();
-    }
     }
 
     @Override
     protected void onResume()
     {
-        super.onResume();
         if(isSignedIn()) {
             refreshUserInfo();
         }
+        super.onResume();
     }
 
     private class insertPlayerAsyncTask extends AsyncTask<String,Void,Player>
@@ -301,24 +305,33 @@ public class MainActivity extends BaseGameActivity {
 
     private void refreshUserInfo()
     {
-        ((TextView) findViewById(R.id.tvUsername)).setText(Games.Players.getCurrentPlayer(getApiClient()).getDisplayName());
-        Games.Leaderboards.loadCurrentPlayerLeaderboardScore(getApiClient(),getString(R.string.leaderboard_MostWins), LeaderboardVariant.TIME_SPAN_ALL_TIME, LeaderboardVariant.COLLECTION_PUBLIC )
-                .setResultCallback(new ResultCallback<Leaderboards.LoadPlayerScoreResult>() {
-                    @Override
-                    public void onResult(Leaderboards.LoadPlayerScoreResult result) {
-                        // Success! Handle the query result.
-                        if(result.getScore() != null) {
-                            ((TextView) findViewById(R.id.tvRanking)).setText(result.getScore().getDisplayRank());
-                            ((TextView) findViewById(R.id.tvScore)).setText(result.getScore().getDisplayScore());
-                            score = result.getScore().getRawScore();
-                        }
-                        else {
-                            ((TextView) findViewById(R.id.tvRanking)).setText("No Rank");
-                            ((TextView) findViewById(R.id.tvScore)).setText("0");
-                        }
+        final Bundle extras = getIntent().getExtras();
+            ((TextView) findViewById(R.id.tvUsername)).setText(Games.Players.getCurrentPlayer(getApiClient()).getDisplayName());
+            Games.Leaderboards.loadCurrentPlayerLeaderboardScore(getApiClient(), getString(R.string.leaderboard_MostWins), LeaderboardVariant.TIME_SPAN_ALL_TIME, LeaderboardVariant.COLLECTION_PUBLIC)
+                    .setResultCallback(new ResultCallback<Leaderboards.LoadPlayerScoreResult>() {
+                        @Override
+                        public void onResult(Leaderboards.LoadPlayerScoreResult result) {
+                            // Success! Handle the query result.
+                            if (result.getScore() != null) {
+                                ((TextView) findViewById(R.id.tvRanking)).setText(result.getScore().getDisplayRank());
+                                //This is a hack, but no other choice at the moment. THIS FUNCTIONALITY WILL BE A BUG AT SOME POINT DUE TO RANK NOT UPDATING, BUT TO FIGURE OUT LATER.
+                                if (extras == null) {
+                                    ((TextView) findViewById(R.id.tvScore)).setText(result.getScore().getDisplayScore());
+                                }
+                                else
+                                {
+                                    ((TextView) findViewById(R.id.tvScore)).setText(((Long)extras.getLong("newScore")).toString());
+                                }
+                                score = result.getScore().getRawScore();
+                                rank = result.getScore().getRank();
+                            } else {
+                                ((TextView) findViewById(R.id.tvRanking)).setText("No Rank");
+                                ((TextView) findViewById(R.id.tvScore)).setText("0");
+                            }
 
-                    }
-                });
-        new insertPlayerAsyncTask().execute();
+                        }
+                    });
+
+        //new insertPlayerAsyncTask().execute();
     }
 }

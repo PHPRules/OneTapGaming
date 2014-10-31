@@ -56,9 +56,11 @@ public class WinActivity extends BaseGameActivity {
     private SystemUiHider mSystemUiHider;
 
     private IabHelper mHelper;
+    Intent backIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        backIntent = new Intent(getApplicationContext(), MainActivity.class);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
 
@@ -273,6 +275,8 @@ public class WinActivity extends BaseGameActivity {
                 // Handle error
                 return;
             }
+            //Make sure we give the user the achievement associated with buying stuff.
+            Games.Achievements.unlock(getApiClient(), getString(R.string.buyAcheivement));
             Bundle extras = getIntent().getExtras();
             long score = -1;
             if (extras != null) {
@@ -283,7 +287,8 @@ public class WinActivity extends BaseGameActivity {
                 if(score >= 0)
                 {
                     Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 50);
-
+                    new AchievementUtil(getApiClient(), WinActivity.this).unlockAchievements((int)score + 50);
+                    backIntent.putExtra("newScore", score +50);
                 }
             }
             else if (purchase.getSku().equals("silver_win_package")) {
@@ -291,6 +296,8 @@ public class WinActivity extends BaseGameActivity {
                 if(score >= 0)
                 {
                     Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 200);
+                    new AchievementUtil(getApiClient(), WinActivity.this).unlockAchievements((int)score + 200);
+                    backIntent.putExtra("newScore", score +200);
 
                 }
             }
@@ -299,6 +306,8 @@ public class WinActivity extends BaseGameActivity {
                 if(score >= 0)
                 {
                     Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 700);
+                    new AchievementUtil(getApiClient(), WinActivity.this).unlockAchievements((int)score + 700);
+                    backIntent.putExtra("newScore", score + 700);
 
                 }
             }
@@ -307,6 +316,8 @@ public class WinActivity extends BaseGameActivity {
                 if(score >= 0)
                 {
                     Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 2500);
+                    new AchievementUtil(getApiClient(), WinActivity.this).unlockAchievements((int)score + 2500);
+                    backIntent.putExtra("newScore", score + 2500);
 
                 }
             }
@@ -315,6 +326,8 @@ public class WinActivity extends BaseGameActivity {
                 if(score >= 0)
                 {
                     Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_MostWins), score + 5000);
+                    new AchievementUtil(getApiClient(), WinActivity.this).unlockAchievements((int)score + 5000);
+                    backIntent.putExtra("newScore", score + 5000);
 
                 }
             }
@@ -337,5 +350,11 @@ public class WinActivity extends BaseGameActivity {
     @Override
     public void onSignInSucceeded() {
         //nothing
+    }
+
+    public void onBackPressed() {
+        startActivity(backIntent);
+        super.onBackPressed();
+        this.finish();
     }
 }
